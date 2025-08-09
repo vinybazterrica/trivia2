@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">trivia2</string>
+
+    <!--Score-->
+    <string name="max_score">Puntaje Maximo : </string>
+    <string name="incorrect_answer_message">Respuesta incorrecta, ha realizado %d puntos.</string>
+    <string name="incorrect_answer_title">Respuesta incorrecta</string>
+    <string name="current_score">Puntaje Actual : </string>
+
+    <string name="accept">Aceptar</string>
+    <string name="correct">Correcto!</string>
+    <string name="incorrect">Incorrecto!</string>
+
+</resources>
