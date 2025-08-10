@@ -11,4 +11,11 @@
     <string name="correct">Correcto!</string>
     <string name="incorrect">Incorrecto!</string>
 
+    <string name="no_internet_message">No hay conexión a internet.</string>
+    <string name="no_questions_message">No se encontraron preguntas.</string>
+    
+    <!--Mensajes de perder-->
+    <string name="asshole_message">Sos un tontito.\n Tu puntuacion es %d Punto/s</string>
+    <string name="regular_score">Mediocre puntuacion.\n Hiciste %d Punto/s</string>
+    <string name="good_score">Buen puntaje.\n Hiciste %d Punto/s</string>"
 </resources>

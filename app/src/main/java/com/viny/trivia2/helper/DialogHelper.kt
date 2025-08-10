@@ -9,11 +9,11 @@ import com.viny.trivia2.R
 
 object DialogHelper {
 
-    fun showIncorrectDialog(activity: Activity, score: Int , onAccept: () -> Unit) {
+    fun showIncorrectDialog(activity: Activity, message : String, onAccept: () -> Unit) {
         MaterialAlertDialogBuilder(activity)
             .setIcon(R.drawable.ic_error)
             .setTitle(activity.getString(R.string.incorrect_answer_title))
-            .setMessage(activity.getString(R.string.incorrect_answer_message, score))
+            .setMessage(message)
             .setPositiveButton(activity.getString(R.string.accept)) { dialog, which ->
                activity.finish()
             }

@@ -31,11 +31,10 @@
 
             <TextView
                 android:id="@+id/tvMaxScore"
+                style="@style/TextviewScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="0"
-                android:textSize="20dp" />
+                android:text="0" />
         </LinearLayout>
 
 
@@ -53,11 +52,10 @@
 
             <TextView
                 android:id="@+id/tvActualScore"
+                style="@style/TextviewScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="0"
-                android:textSize="20dp" />
+                android:text="0" />
         </LinearLayout>
     </LinearLayout>
 
@@ -73,13 +71,20 @@
         app:layout_constraintTop_toTopOf="@+id/linearScore"
         app:layout_constraintVertical_bias="0.2">
 
-        <TextView
-            android:id="@+id/txtPregunta"
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="40dp"
-            tools:text="¿QUE GUSTO TIENE LA SAL?" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtPregunta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                style="@style/TextviewTitle"
+                tools:text="¿QUE GUSTO TIENE LA SAL?" />
+        </androidx.cardview.widget.CardView>
+
 
         <LinearLayout
             android:id="@+id/linearRespuestas"
@@ -93,9 +98,9 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

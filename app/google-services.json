@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "575774239676",
+    "project_id": "trivia2-6b3c7",
+    "storage_bucket": "trivia2-6b3c7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575774239676:android:10ad1b3c771f73d4d819b9",
+        "android_client_info": {
+          "package_name": "com.viny.trivia2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1_JYAoBUeh2ME8ZniNZJ_juDR0ivWbC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

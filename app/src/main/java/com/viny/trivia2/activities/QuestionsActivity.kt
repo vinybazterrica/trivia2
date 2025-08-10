@@ -1,9 +1,13 @@
 package com.viny.trivia2.activities
 
 import android.os.Bundle
+import android.view.ContextThemeWrapper
+import android.view.View.GONE
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.button.MaterialButton
 import com.viny.trivia2.BuildConfig
 import com.viny.trivia2.R
 import com.viny.trivia2.databinding.ActivityQuestionsBinding
@@ -34,7 +38,7 @@ class QuestionsActivity : AppCompatActivity() {
 
     private fun getQuestion() {
         if (!ResourcesHelper.hasInternetConnection(this)) {
-            Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -69,7 +73,7 @@ class QuestionsActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this@QuestionsActivity,
-                        "No se encontraron preguntas",
+                        getString(R.string.no_questions_message),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -98,21 +102,24 @@ class QuestionsActivity : AppCompatActivity() {
         binding.linearRespuestas.removeAllViews()
 
         answers.forEach { answerText ->
-            val button = android.widget.Button(this@QuestionsActivity).apply {
+            val button = MaterialButton(
+                ContextThemeWrapper(this, R.style.ButtonsBorder),
+                null,
+                0
+            ).apply {
                 text = answerText
                 setOnClickListener {
                     if (answerText == correct) {
-                        Toast.makeText(context, "¡Correcto!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT).show()
                         setScore()
                         getQuestion()
                     } else {
-                        Toast.makeText(context, "Incorrecto", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.incorrect), Toast.LENGTH_SHORT).show()
                         DialogHelper.showIncorrectDialog(
                             this@QuestionsActivity,
-                            playerScore,
-                            onAccept = {
-                                finish()
-                            })
+                            selectErrorMessage(),
+                            onAccept = { finish() }
+                        )
                     }
                 }
             }
@@ -126,11 +133,6 @@ class QuestionsActivity : AppCompatActivity() {
         binding.tvActualScore.text = playerScore.toString()
     }
 
-    private fun resetScore() {
-        playerScore = 0
-        binding.tvActualScore.text = playerScore.toString()
-    }
-
     private fun setMaxScore(actualScore: Int) {
         if (actualScore > StorageHelper.getMaxScore(this)) {
             StorageHelper.saveMaxScore(this, actualScore)
@@ -140,5 +142,13 @@ class QuestionsActivity : AppCompatActivity() {
 
     private fun showMaxScore(){
         binding.tvMaxScore.text = StorageHelper.getMaxScore(this).toString()
+    }
+
+    private fun selectErrorMessage() : String{
+        return when{
+            playerScore <= 10 -> getString(R.string.asshole_message, playerScore)
+            playerScore in 11..30 -> getString(R.string.regular_score, playerScore)
+            else -> getString(R.string.good_score, playerScore)
+        } as String
     }
 }
