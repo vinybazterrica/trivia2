@@ -21,7 +21,7 @@ android {
         applicationId = "com.viny.trivia2"
         minSdk = 24
         targetSdk = 36
-        versionCode = 4
+        versionCode = 6
         versionName = "1.$versionCode-beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -75,4 +75,5 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.1.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics-ndk")
+    implementation("com.google.firebase:firebase-messaging")
 }

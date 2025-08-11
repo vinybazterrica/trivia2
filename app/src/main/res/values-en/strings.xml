@@ -20,4 +20,9 @@
     <string name="regular_score">Mediocre score.\n You scored %d points.</string>
     <string name="good_score">Good score. You scored %d points.</string>
     <string name="timeout_message">Times up :c \nFaster next time \n Your score is %d Point(s)</string>
+
+
+    <!--Notificaciones-->
+    <string name="notification_title">Firebase notifications</string>
+    <string name="notification_description">These notifications are from Firebase!</string>
 </resources>

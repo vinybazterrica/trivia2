@@ -19,4 +19,10 @@ data object Constants {
     const val TOTAL_TIMER = 20_000L
     const val END_TIMER = "00:00"
     const val INTERVAL_TIMER = 100L
+
+    //Permission
+    const val REQUEST_NOTIFICATION_PERMISSION = 1001
+
+    //Notifications
+    const val NOTIFICATION_CHANNEL = "NOTIFICATION_CHANNEL"
 }
