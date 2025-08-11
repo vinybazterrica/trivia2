@@ -1,7 +1,9 @@
 package com.viny.trivia2.activities
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.ContextThemeWrapper
+import android.view.View
 import android.view.View.GONE
 import android.widget.Button
 import android.widget.Toast
@@ -26,6 +28,10 @@ class QuestionsActivity : AppCompatActivity() {
 
     var playerScore: Int = 0
     var maxPage: Int = Random.nextInt(100)
+
+    private var countDownTimer: CountDownTimer? = null
+    private val totalTime = 20_000L // 20 segundos
+    private val interval = 100L     // actualizamos cada 100ms
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +93,8 @@ class QuestionsActivity : AppCompatActivity() {
     private fun setQuestion(question: String) {
         binding.progressBar.visibility = GONE
         binding.txtPregunta.text = question
+        binding.linearQuestions.visibility = Button.VISIBLE
+        startTimer()
     }
 
     private fun createAnswersList(correctAnswer: String, answers: List<String>): List<String> {
@@ -109,6 +117,7 @@ class QuestionsActivity : AppCompatActivity() {
             ).apply {
                 text = answerText
                 setOnClickListener {
+                    canceltimer()
                     if (answerText == correct) {
                         Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT).show()
                         setScore()
@@ -150,5 +159,38 @@ class QuestionsActivity : AppCompatActivity() {
             playerScore in 11..30 -> getString(R.string.regular_score, playerScore)
             else -> getString(R.string.good_score, playerScore)
         } as String
+    }
+
+    private fun startTimer() {
+        canceltimer()
+
+        binding.progressTimer.visibility = View.VISIBLE
+        binding.progressTimer.progress = 100
+
+        countDownTimer = object : CountDownTimer(totalTime, interval) {
+            override fun onTick(millisUntilFinished: Long) {
+                val totalSeconds = (millisUntilFinished / 1000).toInt()
+                val minutes = totalSeconds / 60
+                val seconds = totalSeconds % 60
+                binding.tvTimer.text = String.format("%02d:%02d", minutes, seconds)
+
+                val progress = (millisUntilFinished / totalTime.toFloat()) * 100
+                binding.progressTimer.progress = progress.toInt()
+            }
+
+            override fun onFinish() {
+                binding.tvTimer.text = "00:00"
+                binding.progressTimer.progress = 0
+                DialogHelper.showIncorrectDialog(
+                    this@QuestionsActivity,
+                    getString(R.string.timeout_message, playerScore),
+                    onAccept = { finish() }
+                )
+            }
+        }.start()
+    }
+
+    private fun canceltimer(){
+        countDownTimer?.cancel()
     }
 }

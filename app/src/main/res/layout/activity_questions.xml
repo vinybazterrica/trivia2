@@ -24,6 +24,7 @@
             android:layout_marginBottom="5dp">
 
             <TextView
+                style="@style/TextViewScoreTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -45,6 +46,7 @@
 
             <TextView
                 android:id="@+id/tvActualScoreTitle"
+                style="@style/TextViewScoreTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -59,30 +61,78 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frameTimer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearScore"
-        app:layout_constraintVertical_bias="0.2">
+        app:layout_constraintTop_toBottomOf="@+id/linearScore"
+        app:layout_constraintVertical_bias="0.1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:20"
+                android:layout_centerHorizontal="true"/>
+
+            <ProgressBar
+                android:id="@+id/progressTimer"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvTimer"
+                android:layout_height="8dp"
+                android:progress="100"
+                android:max="100"
+                android:progressTint="@color/md_theme_primary"
+                android:indeterminate="false"
+                android:visibility="visible" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearQuestions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameTimer"
+        app:layout_constraintVertical_bias="0.1">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
 
-            <TextView
-                android:id="@+id/txtPregunta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="5dp"
-                style="@style/TextviewTitle"
-                tools:text="¿QUE GUSTO TIENE LA SAL?" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_border"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/txtPregunta"
+                    style="@style/TextviewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    tools:text="¿QUE GUSTO TIENE LA SAL?" />
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
 

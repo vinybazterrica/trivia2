@@ -17,5 +17,6 @@
     <!--Mensajes de perder-->
     <string name="asshole_message">Sos un tontito.\n Tu puntuacion es %d Punto/s</string>
     <string name="regular_score">Mediocre puntuacion.\n Hiciste %d Punto/s</string>
-    <string name="good_score">Buen puntaje.\n Hiciste %d Punto/s</string>"
+    <string name="good_score">Buen puntaje.\n Hiciste %d Punto/s</string>
+    <string name="timeout_message">Se acabo el tiempo :c \nmas rapidito la proxima \n tu puntaje es %d Punto/s</string>
 </resources>
