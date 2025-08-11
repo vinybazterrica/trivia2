@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    style="@style/blackbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.QuestionsActivity">
@@ -80,19 +81,19 @@
                 android:id="@+id/tvTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:20"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:text="00:20" />
 
             <ProgressBar
                 android:id="@+id/progressTimer"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/tvTimer"
                 android:layout_height="8dp"
-                android:progress="100"
-                android:max="100"
-                android:progressTint="@color/md_theme_primary"
+                android:layout_below="@+id/tvTimer"
                 android:indeterminate="false"
+                android:max="100"
+                android:progress="100"
+                android:progressTint="@color/md_theme_primary"
                 android:visibility="visible" />
         </RelativeLayout>
     </FrameLayout>

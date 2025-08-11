@@ -9,13 +9,24 @@ import com.viny.trivia2.R
 
 object DialogHelper {
 
-    fun showIncorrectDialog(activity: Activity, message : String, onAccept: () -> Unit) {
+    fun showIncorrectDialog(activity: Activity, message: String, onAccept: () -> Unit) {
         MaterialAlertDialogBuilder(activity)
             .setIcon(R.drawable.ic_error)
             .setTitle(activity.getString(R.string.incorrect_answer_title))
             .setMessage(message)
             .setPositiveButton(activity.getString(R.string.accept)) { dialog, which ->
-               activity.finish()
+                activity.finish()
+            }
+            .show()
+    }
+
+    fun showTimeOutDialog(activity: Activity, message: String, onAccept: () -> Unit) {
+        MaterialAlertDialogBuilder(activity)
+            .setIcon(R.drawable.ic_timeout)
+            .setTitle(activity.getString(R.string.incorrect_answer_title))
+            .setMessage(message)
+            .setPositiveButton(activity.getString(R.string.accept)) { dialog, which ->
+                activity.finish()
             }
             .show()
     }

@@ -16,13 +16,15 @@ import com.viny.trivia2.databinding.ActivityQuestionsBinding
 import com.viny.trivia2.helper.DialogHelper
 import com.viny.trivia2.helper.ResourcesHelper
 import com.viny.trivia2.helper.StorageHelper
+import com.viny.trivia2.helper.StringHelper
 import com.viny.trivia2.network.apis.QuestionsApi
+import com.viny.trivia2.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.random.Random
 
-class QuestionsActivity : AppCompatActivity() {
+class QuestionsActivity : BaseActivity() {
 
     lateinit var binding: ActivityQuestionsBinding
 
@@ -30,8 +32,6 @@ class QuestionsActivity : AppCompatActivity() {
     var maxPage: Int = Random.nextInt(100)
 
     private var countDownTimer: CountDownTimer? = null
-    private val totalTime = 20_000L // 20 segundos
-    private val interval = 100L     // actualizamos cada 100ms
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,11 +119,13 @@ class QuestionsActivity : AppCompatActivity() {
                 setOnClickListener {
                     canceltimer()
                     if (answerText == correct) {
-                        Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT)
+                            .show()
                         setScore()
                         getQuestion()
                     } else {
-                        Toast.makeText(context, getString(R.string.incorrect), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.incorrect), Toast.LENGTH_SHORT)
+                            .show()
                         DialogHelper.showIncorrectDialog(
                             this@QuestionsActivity,
                             selectErrorMessage(),
@@ -149,16 +151,24 @@ class QuestionsActivity : AppCompatActivity() {
         showMaxScore()
     }
 
-    private fun showMaxScore(){
+    private fun showMaxScore() {
         binding.tvMaxScore.text = StorageHelper.getMaxScore(this).toString()
     }
 
-    private fun selectErrorMessage() : String{
-        return when{
-            playerScore <= 10 -> getString(R.string.asshole_message, playerScore)
-            playerScore in 11..30 -> getString(R.string.regular_score, playerScore)
+    private fun selectErrorMessage(): String {
+        return when {
+            playerScore <= Constants.MIN_SCORE_ASSHOLE -> getString(
+                R.string.asshole_message,
+                playerScore
+            )
+
+            playerScore in Constants.MIN_SCORE_ASSHOLE + 1..Constants.MIN_SCORE_REGULAR -> getString(
+                R.string.regular_score,
+                playerScore
+            )
+
             else -> getString(R.string.good_score, playerScore)
-        } as String
+        }
     }
 
     private fun startTimer() {
@@ -167,21 +177,21 @@ class QuestionsActivity : AppCompatActivity() {
         binding.progressTimer.visibility = View.VISIBLE
         binding.progressTimer.progress = 100
 
-        countDownTimer = object : CountDownTimer(totalTime, interval) {
+        countDownTimer = object : CountDownTimer(Constants.TOTAL_TIMER, Constants.INTERVAL_TIMER) {
             override fun onTick(millisUntilFinished: Long) {
                 val totalSeconds = (millisUntilFinished / 1000).toInt()
                 val minutes = totalSeconds / 60
                 val seconds = totalSeconds % 60
-                binding.tvTimer.text = String.format("%02d:%02d", minutes, seconds)
+                binding.tvTimer.text = StringHelper.hhmmFormat(minutes, seconds)
 
-                val progress = (millisUntilFinished / totalTime.toFloat()) * 100
+                val progress = (millisUntilFinished / Constants.TOTAL_TIMER.toFloat()) * 100
                 binding.progressTimer.progress = progress.toInt()
             }
 
             override fun onFinish() {
-                binding.tvTimer.text = "00:00"
+                binding.tvTimer.text = Constants.END_TIMER
                 binding.progressTimer.progress = 0
-                DialogHelper.showIncorrectDialog(
+                DialogHelper.showTimeOutDialog(
                     this@QuestionsActivity,
                     getString(R.string.timeout_message, playerScore),
                     onAccept = { finish() }
@@ -190,7 +200,7 @@ class QuestionsActivity : AppCompatActivity() {
         }.start()
     }
 
-    private fun canceltimer(){
+    private fun canceltimer() {
         countDownTimer?.cancel()
     }
 }

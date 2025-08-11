@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    style="@style/blackbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
@@ -12,23 +13,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearButtons"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1">
 
         <TextView
             android:id="@+id/tvMaxScoreTitle"
-            android:layout_width="wrap_content"
             style="@style/TextViewScoreTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/max_score" />
 
         <TextView
             android:id="@+id/tvMaxScorePoint"
+            style="@style/TextviewScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            style="@style/TextviewScore"
             app:layout_constraintBottom_toBottomOf="@+id/tvScoreTitle"
             app:layout_constraintStart_toEndOf="@+id/tvScoreTitle"
             tools:text="200" />
@@ -40,19 +42,29 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
         android:layout_marginTop="50dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearPoints">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/btnJugar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Jugar"
+            android:text="@string/play"
             android:textSize="20sp" />
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Version 0.0.1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@ android {
         applicationId = "com.viny.trivia2"
         minSdk = 24
         targetSdk = 36
-        versionCode = 3
+        versionCode = 4
         versionName = "1.$versionCode-beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

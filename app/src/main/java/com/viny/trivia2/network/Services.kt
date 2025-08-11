@@ -7,4 +7,11 @@ data object Services {
 
     //Endpoints
     const val ENDPOINT_QUESTIONS: String = "questions"
+
+    //Headers
+    const val AUTHORIZATION = "Authorization"
+
+    //Querys
+    const val LIMIT = "limit"
+    const val PAGE = "page"
 }

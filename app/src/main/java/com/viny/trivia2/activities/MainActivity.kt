@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.viny.trivia2.databinding.ActivityMainBinding
 import com.viny.trivia2.helper.StorageHelper
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -14,19 +14,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        showAppVersion(binding.tvVersion)
         setMaxScore()
         setListener()
     }
 
-    private fun setListener(){
+    private fun setListener() {
         binding.btnJugar.setOnClickListener {
             val intent = Intent(this, QuestionsActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun setMaxScore(){
+    private fun setMaxScore() {
         binding.tvMaxScorePoint.text = StorageHelper.getMaxScore(this).toString()
     }
 

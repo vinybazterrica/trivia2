@@ -10,6 +10,7 @@
     <string name="accept">Aceptar</string>
     <string name="correct">Correcto!</string>
     <string name="incorrect">Incorrecto!</string>
+    <string name="play">Jugar!</string>
 
     <string name="no_internet_message">No hay conexión a internet.</string>
     <string name="no_questions_message">No se encontraron preguntas.</string>

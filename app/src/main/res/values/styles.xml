@@ -34,4 +34,9 @@
         <item name="android:textColor">@color/md_theme_primary</item>
     </style>
 
+    <!--Activities-->
+    <style name="blackbackground" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/background_black</item>
+    </style>
+
 </resources>
