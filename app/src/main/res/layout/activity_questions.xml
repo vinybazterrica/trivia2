@@ -6,13 +6,13 @@
     style="@style/blackbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.QuestionsActivity">
+    tools:context=".activities.QuestionsActivity"
+    android:paddingHorizontal="20dp">
 
     <LinearLayout
         android:id="@+id/linearScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,12 +66,12 @@
         android:id="@+id/frameTimer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearScore"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintVertical_bias="00">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -102,17 +102,17 @@
         android:id="@+id/linearQuestions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
         android:orientation="vertical"
-        android:visibility="invisible"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameTimer"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintVertical_bias="0">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="8dp"
@@ -128,9 +128,9 @@
                 <TextView
                     android:id="@+id/txtPregunta"
                     style="@style/TextviewTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
                     tools:text="¿QUE GUSTO TIENE LA SAL?" />
             </LinearLayout>
 

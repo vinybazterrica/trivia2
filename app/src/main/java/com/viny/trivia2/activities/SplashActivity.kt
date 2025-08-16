@@ -16,7 +16,7 @@ import com.viny.trivia2.utils.Constants
 
 class SplashActivity : BaseActivity() {
 
-    lateinit var binding : ActivitySplashBinding
+    lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class SplashActivity : BaseActivity() {
         RequestPermission()
     }
 
-    fun RequestPermission(){
+    fun RequestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
                 != PackageManager.PERMISSION_GRANTED
@@ -37,9 +37,11 @@ class SplashActivity : BaseActivity() {
                     arrayOf(Manifest.permission.POST_NOTIFICATIONS),
                     Constants.REQUEST_NOTIFICATION_PERMISSION
                 )
-                return
-            } else
+            } else {
                 goToMain()
+            }
+        } else {
+            goToMain()
         }
     }
 

@@ -7,13 +7,13 @@ import android.view.View
 import android.view.View.GONE
 import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
 import com.viny.trivia2.BuildConfig
 import com.viny.trivia2.R
 import com.viny.trivia2.databinding.ActivityQuestionsBinding
 import com.viny.trivia2.helper.DialogHelper
+import com.viny.trivia2.helper.MediaPlayerHelper
 import com.viny.trivia2.helper.ResourcesHelper
 import com.viny.trivia2.helper.StorageHelper
 import com.viny.trivia2.helper.StringHelper
@@ -29,7 +29,7 @@ class QuestionsActivity : BaseActivity() {
     lateinit var binding: ActivityQuestionsBinding
 
     var playerScore: Int = 0
-    var maxPage: Int = Random.nextInt(100)
+    var maxPage: Int = Random.nextInt(100) //La API devuelve las preguntas por paginas por lo que primero consulto aleatoreamente las primeras 100 y luego seteo el total con lo que devuelve la api
 
     private var countDownTimer: CountDownTimer? = null
 
@@ -124,8 +124,10 @@ class QuestionsActivity : BaseActivity() {
                         setScore()
                         getQuestion()
                     } else {
-                        Toast.makeText(context, getString(R.string.incorrect), Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(context, getString(R.string.incorrect), Toast.LENGTH_SHORT).show()
+
+                        MediaPlayerHelper.playLoseMP3(this@QuestionsActivity)
+
                         DialogHelper.showIncorrectDialog(
                             this@QuestionsActivity,
                             selectErrorMessage(),
