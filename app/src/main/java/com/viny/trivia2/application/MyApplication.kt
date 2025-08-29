@@ -12,12 +12,14 @@ import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.Firebase
 import com.google.firebase.messaging.messaging
 import com.viny.trivia2.databinding.ActivityMainBinding
+import com.viny.trivia2.helper.StorageHelper
 import com.viny.trivia2.utils.Constants
 
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        StorageHelper.init(this)
         logFirebaseToken()
         createNotificationChannel()
     }

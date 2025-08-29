@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.viny.trivia2.R
 import com.viny.trivia2.databinding.ActivitySplashBinding
+import com.viny.trivia2.helper.IntentHelper
 import com.viny.trivia2.utils.Constants
 
 class SplashActivity : BaseActivity() {
@@ -38,10 +39,10 @@ class SplashActivity : BaseActivity() {
                     Constants.REQUEST_NOTIFICATION_PERMISSION
                 )
             } else {
-                goToMain()
+                IntentHelper.goToMain(this)
             }
         } else {
-            goToMain()
+            IntentHelper.goToMain(this)
         }
     }
 
@@ -53,12 +54,7 @@ class SplashActivity : BaseActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == Constants.REQUEST_NOTIFICATION_PERMISSION) {
             // No importa si aceptó o no, seguimos a MainActivity
-            goToMain()
+            IntentHelper.goToMain(this)
         }
-    }
-
-    private fun goToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
     }
 }

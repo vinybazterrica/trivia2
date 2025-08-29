@@ -9,6 +9,7 @@ data object Constants {
 
     //STORAGE
     const val KEY_MAX_SCORE = "KEY_MAX_SCORE"
+    const val PREFS_NAME = "trivia_prefs"
 
     //Range of Score
     const val MIN_SCORE_ASSHOLE = 10
@@ -25,4 +26,8 @@ data object Constants {
 
     //Notifications
     const val NOTIFICATION_CHANNEL = "NOTIFICATION_CHANNEL"
+
+    //Social
+    const val LINKEDIN_URL = "https://www.linkedin.com/in/viniciusbazterrica"
+    const val GITHUB_PROYECT_URL = "https://github.com/vinybazterrica/trivia2"
 }

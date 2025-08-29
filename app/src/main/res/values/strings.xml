@@ -11,6 +11,7 @@
     <string name="correct">Correcto!</string>
     <string name="incorrect">Incorrecto!</string>
     <string name="play">Jugar!</string>
+    <string name="goTo_Proyect_Github" translatable="false">Ir al Proyecto!</string>
 
     <string name="no_internet_message">No hay conexión a internet.</string>
     <string name="no_questions_message">No se encontraron preguntas.</string>

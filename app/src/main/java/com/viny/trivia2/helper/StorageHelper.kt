@@ -1,21 +1,25 @@
 package com.viny.trivia2.helper
 
 import android.content.Context
+import androidx.compose.ui.unit.Constraints
 import com.viny.trivia2.utils.Constants
 
 object StorageHelper {
 
-    private const val PREFS_NAME = "trivia_prefs"
+    private lateinit var appContext: Context
 
-    private fun getPrefs(context: Context) =
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
-    fun saveMaxScore(context: Context, score: Int) {
-        getPrefs(context).edit().putInt(Constants.KEY_MAX_SCORE, score).apply()
+    fun init(context: Context) {
+        appContext = context.applicationContext
     }
 
-    fun getMaxScore(context: Context): Int {
-        return getPrefs(context).getInt(Constants.KEY_MAX_SCORE, 0)
+    private fun getPrefs() = appContext.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE)
+
+    fun saveMaxScore(score: Int) {
+        getPrefs().edit().putInt(Constants.KEY_MAX_SCORE, score).apply()
+    }
+
+    fun getMaxScore(): Int {
+        return getPrefs().getInt(Constants.KEY_MAX_SCORE, 0)
     }
 
 }

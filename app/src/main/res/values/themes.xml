@@ -1,5 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Color de la Status Bar -->
+        <item name="android:statusBarColor">@color/background_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Color de la Navigation Bar -->
+        <item name="android:navigationBarColor">@color/background_black</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>

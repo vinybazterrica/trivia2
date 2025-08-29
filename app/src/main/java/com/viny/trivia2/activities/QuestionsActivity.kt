@@ -62,8 +62,7 @@ class QuestionsActivity : BaseActivity() {
 
                     maxPage = Random.nextInt(questionsResponse.total)
 
-                    var answersListRandom =
-                        createAnswersList(question!!.correctAnswers, question.incorrectAnswers)
+                    var answersListRandom = createAnswersList(question!!.correctAnswers, question.incorrectAnswers)
 
                     withContext(Dispatchers.Main) {
                         questions.let {
@@ -119,8 +118,7 @@ class QuestionsActivity : BaseActivity() {
                 setOnClickListener {
                     canceltimer()
                     if (answerText == correct) {
-                        Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT).show()
                         setScore()
                         getQuestion()
                     } else {
@@ -147,14 +145,14 @@ class QuestionsActivity : BaseActivity() {
     }
 
     private fun setMaxScore(actualScore: Int) {
-        if (actualScore > StorageHelper.getMaxScore(this)) {
-            StorageHelper.saveMaxScore(this, actualScore)
+        if (actualScore > StorageHelper.getMaxScore()) {
+            StorageHelper.saveMaxScore(actualScore)
         }
         showMaxScore()
     }
 
     private fun showMaxScore() {
-        binding.tvMaxScore.text = StorageHelper.getMaxScore(this).toString()
+        binding.tvMaxScore.text = StorageHelper.getMaxScore().toString()
     }
 
     private fun selectErrorMessage(): String {
