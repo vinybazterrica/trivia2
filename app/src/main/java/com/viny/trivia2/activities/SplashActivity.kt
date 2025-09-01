@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -14,6 +15,7 @@ import com.viny.trivia2.R
 import com.viny.trivia2.databinding.ActivitySplashBinding
 import com.viny.trivia2.helper.IntentHelper
 import com.viny.trivia2.utils.Constants
+import java.util.logging.Handler
 
 class SplashActivity : BaseActivity() {
 
@@ -39,11 +41,17 @@ class SplashActivity : BaseActivity() {
                     Constants.REQUEST_NOTIFICATION_PERMISSION
                 )
             } else {
-                IntentHelper.goToMain(this)
+                goToMain()
             }
         } else {
-            IntentHelper.goToMain(this)
+            goToMain()
         }
+    }
+
+    fun goToMain(){
+        android.os.Handler(Looper.getMainLooper()).postDelayed({
+            IntentHelper.goToMain(this)
+        }, 3000L)
     }
 
     override fun onRequestPermissionsResult(
