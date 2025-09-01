@@ -17,6 +17,7 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setMaxScore()
+        showLottieLogo()
         showSocialButtons()
         setListener()
     }
@@ -47,6 +48,11 @@ class MainActivity : BaseActivity() {
         binding.lavLinkedin.playAnimation()
 
         setListener()
+    }
+
+    private fun showLottieLogo(){
+        binding.lottieLogo.setAnimation(R.raw.ic_lottie_question)
+        binding.lottieLogo.playAnimation()
     }
 
 
