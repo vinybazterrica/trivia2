@@ -24,8 +24,8 @@ class MyApplication : Application() {
         createNotificationChannel()
     }
 
-    private fun createNotificationChannel(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 Constants.NOTIFICATION_CHANNEL,
                 "Notificaciones de Firebase",
@@ -38,9 +38,9 @@ class MyApplication : Application() {
         }
     }
 
-    private fun logFirebaseToken(){
+    private fun logFirebaseToken() {
         Firebase.messaging.token.addOnCompleteListener {
-            if (it.isSuccessful){
+            if (it.isSuccessful) {
                 Log.d("TOKEN FIREBASE", it.result)
             }
         }

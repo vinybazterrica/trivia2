@@ -40,7 +40,7 @@ class MainActivity : BaseActivity() {
         binding.tvMaxScorePoint.text = StorageHelper.getMaxScore().toString()
     }
 
-    private fun showSocialButtons(){
+    private fun showSocialButtons() {
         binding.lavGithub.setAnimation(R.raw.ic_lottie_github)
         binding.lavGithub.playAnimation()
 
@@ -50,7 +50,7 @@ class MainActivity : BaseActivity() {
         setListener()
     }
 
-    private fun showLottieLogo(){
+    private fun showLottieLogo() {
         binding.lottieLogo.setAnimation(R.raw.ic_lottie_question)
         binding.lottieLogo.playAnimation()
     }

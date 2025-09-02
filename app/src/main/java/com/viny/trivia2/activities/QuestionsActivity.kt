@@ -29,7 +29,8 @@ class QuestionsActivity : BaseActivity() {
     lateinit var binding: ActivityQuestionsBinding
 
     var playerScore: Int = 0
-    var maxPage: Int = Random.nextInt(100) //La API devuelve las preguntas por paginas por lo que primero consulto aleatoreamente las primeras 100 y luego seteo el total con lo que devuelve la api
+    var maxPage: Int =
+        Random.nextInt(100) //La API devuelve las preguntas por paginas por lo que primero consulto aleatoreamente las primeras 100 y luego seteo el total con lo que devuelve la api
 
     private var countDownTimer: CountDownTimer? = null
 
@@ -62,7 +63,8 @@ class QuestionsActivity : BaseActivity() {
 
                     maxPage = Random.nextInt(questionsResponse.total)
 
-                    var answersListRandom = createAnswersList(question!!.correctAnswers, question.incorrectAnswers)
+                    var answersListRandom =
+                        createAnswersList(question!!.correctAnswers, question.incorrectAnswers)
 
                     withContext(Dispatchers.Main) {
                         questions.let {
@@ -118,11 +120,13 @@ class QuestionsActivity : BaseActivity() {
                 setOnClickListener {
                     canceltimer()
                     if (answerText == correct) {
-                        Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.correct), Toast.LENGTH_SHORT)
+                            .show()
                         setScore()
                         getQuestion()
                     } else {
-                        Toast.makeText(context, getString(R.string.incorrect), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.incorrect), Toast.LENGTH_SHORT)
+                            .show()
 
                         MediaPlayerHelper.playLoseMP3(this@QuestionsActivity)
 

@@ -28,11 +28,11 @@ object IntentHelper {
         launchIntentAndFinish(activity, MainActivity::class.java, bundle, true)
     }
 
-    fun goToQuestions(activity: Activity, bundle: Bundle? = null){
+    fun goToQuestions(activity: Activity, bundle: Bundle? = null) {
         launchIntentAndFinish(activity, QuestionsActivity::class.java, bundle, false)
     }
 
-    fun goToUrl(activity: Activity, url: String){
+    fun goToUrl(activity: Activity, url: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = android.net.Uri.parse(url)
         activity.startActivity(intent)

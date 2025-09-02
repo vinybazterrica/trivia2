@@ -48,7 +48,7 @@ class SplashActivity : BaseActivity() {
         }
     }
 
-    fun goToMain(){
+    fun goToMain() {
         android.os.Handler(Looper.getMainLooper()).postDelayed({
             IntentHelper.goToMain(this)
         }, 3000L)

@@ -18,11 +18,11 @@ open class BaseActivity : AppCompatActivity() {
         tvVersion?.text = Constants.VERSION_CODE
     }
 
-    fun goToGithub(){
+    fun goToGithub() {
         IntentHelper.goToUrl(this, Constants.GITHUB_PROYECT_URL)
     }
 
-    fun goToLinkedin(){
+    fun goToLinkedin() {
         IntentHelper.goToUrl(this, Constants.LINKEDIN_URL)
     }
 }

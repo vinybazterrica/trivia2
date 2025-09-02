@@ -7,7 +7,7 @@ import com.viny.trivia2.R
 
 object MediaPlayerHelper {
 
-    fun playLoseMP3(activity : Activity) {
+    fun playLoseMP3(activity: Activity) {
         var mediaPlayer: MediaPlayer? = null
 
         mediaPlayer = MediaPlayer.create(activity, R.raw.sonido_perder)

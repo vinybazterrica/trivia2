@@ -12,7 +12,8 @@ object StorageHelper {
         appContext = context.applicationContext
     }
 
-    private fun getPrefs() = appContext.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE)
+    private fun getPrefs() =
+        appContext.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE)
 
     fun saveMaxScore(score: Int) {
         getPrefs().edit().putInt(Constants.KEY_MAX_SCORE, score).apply()
