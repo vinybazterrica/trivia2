@@ -31,5 +31,13 @@ object DialogHelper {
             .show()
     }
 
+    fun showNoInternetDialog(activity: Activity, onAccept: () -> Unit) {
+        MaterialAlertDialogBuilder(activity)
+            .setIcon(R.drawable.ic_error)
+            .setTitle(activity.getString(R.string.no_internet_title))
+            .setMessage(activity.getString(R.string.no_internet_message))
+
+    }
+
 
 }

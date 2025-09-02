@@ -9,9 +9,12 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
+import com.google.gson.Gson
 import com.viny.trivia2.BuildConfig
 import com.viny.trivia2.R
 import com.viny.trivia2.databinding.ActivityQuestionsBinding
+import com.viny.trivia2.db.DBQuestion
+import com.viny.trivia2.db.QuestionsRepository
 import com.viny.trivia2.helper.DialogHelper
 import com.viny.trivia2.helper.MediaPlayerHelper
 import com.viny.trivia2.helper.ResourcesHelper
@@ -45,48 +48,65 @@ class QuestionsActivity : BaseActivity() {
 
     private fun getQuestion() {
         if (!ResourcesHelper.hasInternetConnection(this)) {
-            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_SHORT).show()
-            return
-        }
+            val randomQuestion = QuestionsRepository(this).getQuestionRandom()
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val questionsResponse = QuestionsApi.instance.getQuestions(
-                    apiKey = BuildConfig.API_KEY,
-                    limit = 1,
-                    page = maxPage
+            randomQuestion.let {
+
+                val incorrectAnswers: List<String> = randomQuestion!!.incorrectAnswersJson.split("|").map { it.trim() }
+
+
+                setAnswers(
+                    answers = createAnswersList(randomQuestion.correctAnswers, incorrectAnswers),
+                    correct = randomQuestion.correctAnswers
                 )
 
-                val questions = questionsResponse.questions
-                if (questions.isNotEmpty()) {
-                    var question = questions.firstOrNull()
+                setQuestion(randomQuestion.question)
+            }
 
-                    maxPage = Random.nextInt(questionsResponse.total)
+        } else {
 
-                    var answersListRandom =
-                        createAnswersList(question!!.correctAnswers, question.incorrectAnswers)
+            lifecycleScope.launch(Dispatchers.IO) {
+                try {
+                    val questionsResponse = QuestionsApi.instance.getQuestions(
+                        apiKey = BuildConfig.API_KEY,
+                        limit = 1,
+                        page = maxPage
+                    )
 
-                    withContext(Dispatchers.Main) {
-                        questions.let {
-                            setAnswers(
-                                answers = answersListRandom,
-                                correct = question.correctAnswers
-                            )
+                    val questions = questionsResponse.questions
+                    if (questions.isNotEmpty()) {
+                        var question = questions.firstOrNull()
 
-                            setQuestion(question.question)
+                        maxPage = Random.nextInt(questionsResponse.total)
+
+                        var answersListRandom =
+                            createAnswersList(question!!.correctAnswers, question.incorrectAnswers)
+
+                        withContext(Dispatchers.Main) {
+                            questions.let {
+                                setAnswers(
+                                    answers = answersListRandom,
+                                    correct = question.correctAnswers
+                                )
+
+                                setQuestion(question.question)
+                            }
                         }
-                    }
 
-                } else {
+                    } else {
+                        Toast.makeText(
+                            this@QuestionsActivity,
+                            getString(R.string.no_questions_message),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } catch (e: Exception) {
                     Toast.makeText(
                         this@QuestionsActivity,
-                        getString(R.string.no_questions_message),
+                        "Error: ${e.message}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            } catch (e: Exception) {
-                Toast.makeText(this@QuestionsActivity, "Error: ${e.message}", Toast.LENGTH_SHORT)
-                    .show()
             }
         }
     }

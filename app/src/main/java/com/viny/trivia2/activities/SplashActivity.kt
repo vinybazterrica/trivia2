@@ -6,15 +6,22 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.viny.trivia2.R
 import com.viny.trivia2.databinding.ActivitySplashBinding
+import com.viny.trivia2.db.DBQuestion
 import com.viny.trivia2.helper.IntentHelper
+import com.viny.trivia2.helper.ResourcesHelper
+import com.viny.trivia2.models.Question
+import com.viny.trivia2.models.db.QuestionEntity
 import com.viny.trivia2.utils.Constants
+import kotlinx.coroutines.launch
 import java.util.logging.Handler
 
 class SplashActivity : BaseActivity() {
@@ -41,17 +48,15 @@ class SplashActivity : BaseActivity() {
                     Constants.REQUEST_NOTIFICATION_PERMISSION
                 )
             } else {
-                goToMain()
+                getQuestionsToOfflineLauncher()
             }
         } else {
-            goToMain()
+            getQuestionsToOfflineLauncher()
         }
     }
 
     fun goToMain() {
-        android.os.Handler(Looper.getMainLooper()).postDelayed({
-            IntentHelper.goToMain(this)
-        }, 3000L)
+        IntentHelper.goToMain(this)
     }
 
     override fun onRequestPermissionsResult(
@@ -64,5 +69,31 @@ class SplashActivity : BaseActivity() {
             // No importa si aceptó o no, seguimos a MainActivity
             IntentHelper.goToMain(this)
         }
+    }
+
+    fun getQuestionsToOfflineLauncher() {
+        lifecycleScope.launch {
+            getQuestionsToOffline()
+        }
+    }
+
+    suspend fun getQuestionsToOffline(){
+        if (!ResourcesHelper.hasInternetConnection(this)) { //todo : cambiar para que si tengo questions en la base de datos no consulte el internet
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_SHORT).show() //todo : agregar el Dialog personalizado de sin internet
+            return
+        }
+
+        val questionsResponse = getQuestion(184, this)
+
+        val questionDao = DBQuestion(this).getQuestionDao()
+
+        questionDao.deleteBuilder().delete()
+
+        questionsResponse.questions.forEach { q ->
+            val questionEntity = QuestionEntity.setQuestionDAO(q)
+            questionDao.createOrUpdate(questionEntity)
+        }
+
+        goToMain()
     }
 }

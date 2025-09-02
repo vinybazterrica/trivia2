@@ -21,7 +21,7 @@ android {
         applicationId = "com.viny.trivia2"
         minSdk = 24
         targetSdk = 36
-        versionCode = 13
+        versionCode = 14
         versionName = "1.$versionCode-beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -80,4 +80,7 @@ dependencies {
 
     //Lottie
     implementation(libs.lottie)
+
+    //ORM Lite
+    implementation(libs.ormlite.android)
 }

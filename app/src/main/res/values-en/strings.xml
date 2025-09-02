@@ -14,6 +14,8 @@
 
     <string name="no_internet_message">No internet connection.</string>
     <string name="no_questions_message">No questions found.</string>
+    <string name="no_internet_title">No internet connection.</string>
+    <string name="no_internet_description">You need to be connected to the internet the first time you use it in order to save the questions and for it to work OFFLINE.</string>
 
     <!--Mensajes de perder-->
     <string name="asshole_message">You are a silly goose. Your score is %d points.</string>
