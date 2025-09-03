@@ -17,6 +17,9 @@
     <string name="no_questions_message">No se encontraron preguntas.</string>
     <string name="no_internet_title">Sin conexión a internet</string>
     <string name="no_internet_description">Es necesario que la primera vez tenga internet para guardar las preguntas y que funcione OFFLINE</string>
+    <string name="retry">Reintentar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="message_getting_questions_offline">Obteniendo preguntas para OFFLINE</string>
 
     <!--Mensajes de perder-->
     <string name="asshole_message">Sos un tontito.\n Tu puntuacion es %d Punto/s</string>

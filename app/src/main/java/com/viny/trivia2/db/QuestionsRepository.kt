@@ -24,6 +24,10 @@ class QuestionsRepository(context: Context) {
         return if (allQuestions.isNotEmpty()) allQuestions.random() else null
     }
 
+    fun hasQuestions() : Boolean {
+        return dao.countOf() > 0
+    }
+
     fun getAllQuestions(): List<QuestionEntity> {
         return dao.queryForAll()
     }

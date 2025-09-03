@@ -16,6 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import com.viny.trivia2.R
 import com.viny.trivia2.databinding.ActivitySplashBinding
 import com.viny.trivia2.db.DBQuestion
+import com.viny.trivia2.db.QuestionsRepository
+import com.viny.trivia2.helper.DialogHelper
 import com.viny.trivia2.helper.IntentHelper
 import com.viny.trivia2.helper.ResourcesHelper
 import com.viny.trivia2.models.Question
@@ -59,29 +61,31 @@ class SplashActivity : BaseActivity() {
         IntentHelper.goToMain(this)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == Constants.REQUEST_NOTIFICATION_PERMISSION) {
-            // No importa si aceptó o no, seguimos a MainActivity
-            IntentHelper.goToMain(this)
-        }
-    }
-
     fun getQuestionsToOfflineLauncher() {
-        lifecycleScope.launch {
-            getQuestionsToOffline()
+        if (QuestionsRepository(this).hasQuestions()) {
+            goToMain()
+        } else {
+            Toast.makeText(
+                this,
+                getString(R.string.message_getting_questions_offline),
+                Toast.LENGTH_SHORT
+            )
+                .show()
+
+            if (!ResourcesHelper.hasInternetConnection(this)) {
+                DialogHelper.showNoInternetDialog(this) {
+                    getQuestionsToOfflineLauncher()
+                }
+                return
+            }
+
+            lifecycleScope.launch {
+                getQuestionsToOffline()
+            }
         }
     }
 
-    suspend fun getQuestionsToOffline(){
-        if (!ResourcesHelper.hasInternetConnection(this)) { //todo : cambiar para que si tengo questions en la base de datos no consulte el internet
-            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_SHORT).show() //todo : agregar el Dialog personalizado de sin internet
-            return
-        }
+    suspend fun getQuestionsToOffline() {
 
         val questionsResponse = getQuestion(184, this)
 
@@ -95,5 +99,17 @@ class SplashActivity : BaseActivity() {
         }
 
         goToMain()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Constants.REQUEST_NOTIFICATION_PERMISSION) {
+            // No importa si aceptó o no, seguimos
+            getQuestionsToOfflineLauncher()
+        }
     }
 }

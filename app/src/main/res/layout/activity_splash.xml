@@ -36,6 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvAppName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateTint="@color/md_theme_primary"
         android:layout_marginTop="40dp"/>
 
 
